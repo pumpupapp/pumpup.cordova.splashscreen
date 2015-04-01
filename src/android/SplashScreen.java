@@ -76,7 +76,8 @@ public class SplashScreen extends CordovaPlugin {
 
         firstShow = false;
         loadSpinner();
-        showSplashScreen(true);
+        Boolean hideAfterDelay = preferences.getBoolean("AutoHideSplashScreen", true);
+        showSplashScreen(hideAfterDelay);
     }
 
     @Override
@@ -229,7 +230,7 @@ public class SplashScreen extends CordovaPlugin {
     private void loadSpinner() {
         // If loadingDialog property, then show the App loading dialog for first page of app
         String loading = null;
-        if (webView.canGoBack()) {
+        if (webView.getNavigationHistory().canGoBack()) {
             loading = preferences.getString("LoadingDialog", null);
         }
         else {
